@@ -42,7 +42,8 @@ RUN npm install -g yarn && npm cache clean --force
 WORKDIR /var/www/html
 
 # Copy composer files first for better layer caching
-COPY composer.json composer.lock ./
+COPY composer.json ./
+COPY composer.lock* ./
 
 # Install PHP dependencies
 RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist --no-interaction
