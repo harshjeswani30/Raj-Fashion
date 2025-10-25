@@ -1,0 +1,48 @@
+# FleetCart Environment Configuration for Railway.app
+# Copy these variables to Railway dashboard under "Variables" section
+
+APP_NAME=FleetCart
+APP_ENV=production
+APP_KEY=
+APP_DEBUG=false
+APP_TIMEZONE=UTC
+APP_LOCALE=en
+
+# Database Configuration (Railway MySQL)
+# Reference MySQL service variables like: ${{MySQL.MYSQLHOST}}
+DB_CONNECTION=mysql
+DB_HOST=${{MySQL.MYSQLHOST}}
+DB_PORT=${{MySQL.MYSQLPORT}}
+DB_DATABASE=${{MySQL.MYSQLDATABASE}}
+DB_USERNAME=${{MySQL.MYSQLUSER}}
+DB_PASSWORD=${{MySQL.MYSQLPASSWORD}}
+
+# Redis Configuration (Optional - Railway Redis)
+REDIS_HOST=${{Redis.REDISHOST}}
+REDIS_PASSWORD=${{Redis.REDISPASSWORD}}
+REDIS_PORT=${{Redis.REDISPORT}}
+
+# Cache & Session
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+QUEUE_CONNECTION=sync
+
+# Mail Configuration (Update with your mail service)
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=noreply@yourdomain.com
+MAIL_FROM_NAME=FleetCart
+
+# Additional Settings
+LOG_CHANNEL=stack
+BROADCAST_DRIVER=log
+FILESYSTEM_DISK=local
+
+# FleetCart Specific
+INSTALLED=false
+
+

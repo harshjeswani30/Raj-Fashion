@@ -1,0 +1,23 @@
+# Nixpacks Configuration for Railway
+[phases.setup]
+nixPkgs = ["php82", "php82Packages.composer", "nodejs-18_x", "yarn"]
+aptPkgs = ["libpng-dev", "libonig-dev", "libxml2-dev", "libzip-dev"]
+
+[phases.install]
+cmds = [
+  "composer install --no-dev --optimize-autoloader --no-interaction",
+  "yarn install",
+  "yarn build"
+]
+
+[phases.build]
+cmds = [
+  "php artisan config:cache",
+  "php artisan route:cache",
+  "php artisan view:cache"
+]
+
+[start]
+cmd = "php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"
+
+

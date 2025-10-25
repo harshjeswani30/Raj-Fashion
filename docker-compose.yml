@@ -1,0 +1,92 @@
+# Docker Compose for Local FleetCart Development
+# Run: docker-compose up -d
+
+version: '3.8'
+
+services:
+  # PHP Application
+  app:
+    image: webdevops/php-apache:8.2
+    container_name: fleetcart_app
+    ports:
+      - "8080:80"
+    environment:
+      - WEB_DOCUMENT_ROOT=/app/public
+      - PHP_DISPLAY_ERRORS=1
+      - PHP_MEMORY_LIMIT=512M
+      - PHP_MAX_EXECUTION_TIME=300
+      - PHP_UPLOAD_MAX_FILESIZE=100M
+      - PHP_POST_MAX_SIZE=100M
+      - APP_NAME=FleetCart
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - APP_URL=http://localhost:8080
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=fleetcart
+      - DB_USERNAME=fleetcart
+      - DB_PASSWORD=secret
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - CACHE_DRIVER=redis
+      - SESSION_DRIVER=redis
+      - QUEUE_CONNECTION=redis
+    volumes:
+      - .:/app
+      - ./apache-custom.conf:/opt/docker/etc/httpd/conf.d/z-custom.conf
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - fleetcart
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: fleetcart_mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_DATABASE=fleetcart
+      - MYSQL_USER=fleetcart
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - fleetcart
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: fleetcart_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - fleetcart
+
+  # phpMyAdmin (Optional - for database management)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: fleetcart_phpmyadmin
+    environment:
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
+      - PMA_USER=fleetcart
+      - PMA_PASSWORD=secret
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
+    networks:
+      - fleetcart
+
+networks:
+  fleetcart:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local

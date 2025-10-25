@@ -1,0 +1,58 @@
+# FleetCart Docker Ignore File
+# Exclude unnecessary files from Docker image
+
+# Version Control
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Documentation
+Documentation/
+*.md
+!README.md
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Testing
+tests/
+phpunit.xml
+.phpunit.result.cache
+
+# Development
+.env.example
+.editorconfig
+
+# Samples
+Samples/
+
+# Logs
+*.log
+storage/logs/*
+
+# Cache
+bootstrap/cache/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+
+# Deployment files
+deploy-to-railway.sh
+deploy-to-railway.bat
+RAILWAY_DEPLOYMENT_GUIDE.md
+QUICK_START.md
+
+
