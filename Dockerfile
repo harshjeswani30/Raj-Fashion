@@ -42,24 +42,16 @@ RUN npm install -g yarn && npm cache clean --force
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy composer files first for better layer caching
-COPY composer.json ./
-COPY composer.lock* ./
+# Copy application files first (needed for composer-merge-plugin to access modules/*/composer.json)
+COPY . .
 
-# Install PHP dependencies (including dev for build process)
-RUN composer install --no-scripts --no-autoloader --prefer-dist --no-interaction
-
-# Copy package files for Node dependencies
-COPY package.json ./
-COPY yarn.lock* ./
+# Install PHP dependencies (merge-plugin will now find module dependencies)
+RUN composer install --no-scripts --prefer-dist --no-interaction
 
 # Install Node dependencies
 RUN yarn install --production=false
 
-# Copy application files
-COPY . .
-
-# Complete composer installation
+# Complete composer installation and generate optimized autoloader
 RUN composer dump-autoload --optimize
 
 # Build frontend assets
