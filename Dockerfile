@@ -45,14 +45,21 @@ WORKDIR /var/www/html
 # Copy application files first (needed for composer-merge-plugin to access modules/*/composer.json)
 COPY . .
 
-# Create .env file from example (needed for artisan commands during composer install)
-RUN cp .env.example .env
+# Install PHP dependencies (merge-plugin will now find module dependencies)
+# First install without scripts to get the merge plugin working
+RUN composer install --no-scripts --prefer-dist --no-interaction
 
-# Install PHP dependencies (allow scripts for merge-plugin to work)
-RUN composer install --prefer-dist --no-interaction
+# Run composer update to ensure all merged dependencies are installed
+RUN composer update --no-scripts --prefer-dist --no-interaction
 
 # Install Node dependencies
 RUN yarn install --production=false
+
+# Now run dump-autoload with scripts to trigger package discovery
+RUN composer dump-autoload --optimize --no-scripts
+
+# Manually run package discovery if needed
+RUN php artisan package:discover --ansi || true
 
 # Build frontend assets
 RUN yarn build && yarn cache clean
