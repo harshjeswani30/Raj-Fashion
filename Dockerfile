@@ -46,8 +46,8 @@ WORKDIR /var/www/html
 COPY composer.json ./
 COPY composer.lock* ./
 
-# Install PHP dependencies
-RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist --no-interaction
+# Install PHP dependencies (including dev for build process)
+RUN composer install --no-scripts --no-autoloader --prefer-dist --no-interaction
 
 # Copy package files for Node dependencies
 COPY package.json ./
@@ -60,7 +60,7 @@ RUN yarn install --production=false
 COPY . .
 
 # Complete composer installation
-RUN composer dump-autoload --optimize --no-dev
+RUN composer dump-autoload --optimize
 
 # Build frontend assets
 RUN yarn build && yarn cache clean
