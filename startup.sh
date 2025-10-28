@@ -80,7 +80,13 @@ php artisan storage:link 2>/dev/null || echo "⚠️  Storage link already exist
 
 # Start the application
 echo "✅ Starting web server..."
-exec "$@"
+"$@" &
+APACHE_PID=$!
+
+# proceed with setup without blocking web server availability
+
+# Wait for apache to exit to terminate container properly
+wait $APACHE_PID
 
 
 
