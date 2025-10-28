@@ -17,7 +17,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Artisan;
 use FleetCart\Http\Requests\InstallRequest;
-use Jackiedo\DotenvEditor\Facades\DotenvEditor;
+use FleetCart\Support\EnvWriter;
 use Illuminate\Contracts\Foundation\Application;
 use FleetCart\Http\Middleware\RedirectIfInstalled;
 
@@ -53,7 +53,7 @@ class InstallController extends Controller
             $store->setup($request);
             $app->setup();
 
-            DotenvEditor::setKey('APP_INSTALLED', 'true')->save();
+            EnvWriter::load()->setKey('APP_INSTALLED', 'true')->save();
 
             Artisan::call('key:generate', ['--force' => true]);
 

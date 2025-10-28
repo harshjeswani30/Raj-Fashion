@@ -4,7 +4,7 @@ namespace FleetCart\Install;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Artisan;
-use Jackiedo\DotenvEditor\Facades\DotenvEditor;
+use FleetCart\Support\EnvWriter;
 
 class Database
 {
@@ -40,15 +40,13 @@ class Database
 
     private function setEnvVariables($request): void
     {
-        $env = DotenvEditor::load();
-
-        $env->setKey('DB_HOST', $request['db_host']);
-        $env->setKey('DB_PORT', $request['db_port']);
-        $env->setKey('DB_DATABASE', $request['db_database']);
-        $env->setKey('DB_USERNAME', $request['db_username']);
-        $env->setKey('DB_PASSWORD', $request['db_password']);
-
-        $env->save();
+        $env = EnvWriter::load();
+        $env->setKey('DB_HOST', (string) $request['db_host'])
+            ->setKey('DB_PORT', (string) $request['db_port'])
+            ->setKey('DB_DATABASE', (string) $request['db_database'])
+            ->setKey('DB_USERNAME', (string) $request['db_username'])
+            ->setKey('DB_PASSWORD', (string) $request['db_password'])
+            ->save();
     }
 
 

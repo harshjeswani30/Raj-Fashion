@@ -7,7 +7,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
-use Jackiedo\DotenvEditor\DotenvEditorServiceProvider;
+// Removed DotenvEditor dependency
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -46,8 +46,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        if (!config('app.installed')) {
-            $this->app->register(DotenvEditorServiceProvider::class);
-        }
+        // No-op
     }
 }

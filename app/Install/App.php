@@ -5,7 +5,7 @@ namespace FleetCart\Install;
 use Modules\User\Entities\Role;
 use Modules\Setting\Entities\Setting;
 use Modules\Currency\Entities\CurrencyRate;
-use Jackiedo\DotenvEditor\Facades\DotenvEditor;
+use FleetCart\Support\EnvWriter;
 
 class App
 {
@@ -21,14 +21,12 @@ class App
 
     private function setEnvVariables(): void
     {
-        $env = DotenvEditor::load();
-
-        $env->setKey('APP_ENV', 'production');
-        $env->setKey('APP_DEBUG', 'false');
-        $env->setKey('APP_CACHE', 'true');
-        $env->setKey('APP_URL', url('/'));
-
-        $env->save();
+        $env = EnvWriter::load();
+        $env->setKey('APP_ENV', 'production')
+            ->setKey('APP_DEBUG', 'false')
+            ->setKey('APP_CACHE', 'true')
+            ->setKey('APP_URL', url('/'))
+            ->save();
     }
 
 
