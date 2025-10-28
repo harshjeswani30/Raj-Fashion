@@ -52,11 +52,9 @@ RUN if [ -n "$GITHUB_TOKEN" ]; then \
     fi
 
 # Install PHP dependencies (merge-plugin will now find module dependencies)
-# First install without scripts to get the merge plugin working
-RUN composer install --no-scripts --prefer-dist --no-interaction
-
-# Run composer update to ensure all merged dependencies are installed
-RUN composer update --no-scripts --prefer-dist --no-interaction
+# Install once without scripts to allow package discovery later
+ENV COMPOSER_ALLOW_SUPERUSER=1
+RUN composer install --no-dev --no-scripts --prefer-dist --no-interaction --no-progress
 
 # Install Node dependencies
 RUN yarn install --production=false
