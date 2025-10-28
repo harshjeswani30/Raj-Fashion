@@ -17,6 +17,9 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+    # Ensure /health always serves the static file without hitting Laravel
+    RewriteRule ^health$ health [L]
+
     # Remove trailing slashes from non-directories
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
