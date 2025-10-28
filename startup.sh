@@ -5,6 +5,18 @@
 
 echo "🚀 Starting FleetCart..."
 
+# Configure Composer GitHub token at runtime if provided
+if [ -n "$GITHUB_TOKEN" ]; then
+    echo "🔐 Configuring Composer GitHub token..."
+    composer config -g github-oauth.github.com "$GITHUB_TOKEN" 2>/dev/null || true
+fi
+
+# Ensure dependencies exist (fallback if build step was skipped/failed)
+if [ ! -f vendor/autoload.php ]; then
+    echo "📦 Installing PHP dependencies (runtime fallback)..."
+    composer install --no-dev --no-scripts --prefer-dist --no-interaction --no-progress 2>/dev/null || true
+fi
+
 # Create .env if it doesn't exist (do this BEFORE database check)
 if [ ! -f .env ]; then
     echo "📝 Creating .env file..."
