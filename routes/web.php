@@ -7,3 +7,8 @@ Route::post('install', 'InstallController@install')->name('install.do');
 
 Route::get('license', 'LicenseController@create')->name('license.create');
 Route::post('license', 'LicenseController@store')->name('license.store');
+
+// Lightweight health endpoint for Railway healthcheck
+Route::get('health', function () {
+    return response()->json(['status' => 'ok']);
+});

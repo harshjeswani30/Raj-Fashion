@@ -100,7 +100,7 @@ RUN chmod +x /usr/local/bin/startup.sh
 
 # Health check with longer timeout for Railway
 HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=5 \
-    CMD curl -f http://localhost/ || exit 1
+    CMD curl -f http://localhost/health || exit 1
 
 # Expose port
 EXPOSE 80
