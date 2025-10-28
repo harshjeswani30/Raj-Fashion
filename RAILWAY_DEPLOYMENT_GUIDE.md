@@ -89,11 +89,29 @@ Before you begin, ensure you have:
    MAIL_FROM_ADDRESS=noreply@yourdomain.com
    MAIL_FROM_NAME=FleetCart
    
+   # GitHub Authentication (Required!)
+   # Create a Personal Access Token at https://github.com/settings/tokens
+   # Grant 'repo' scope for private repositories
+   GITHUB_TOKEN=your_github_personal_access_token_here
+   
    # FleetCart
    INSTALLED=false
    ```
 
 2. **Important:** The `APP_URL` will be auto-set by Railway to your public domain
+
+3. **⚠️ CRITICAL: GitHub Token Setup**
+   
+   FleetCart requires a GitHub Personal Access Token to access private repositories during the build. 
+   Without this, the build will fail with authentication errors.
+   
+   **Steps to create the token:**
+   1. Go to https://github.com/settings/tokens
+   2. Click "Generate new token (classic)"
+   3. Give it a name like "FleetCart Railway Build"
+   4. Grant the `repo` scope (to access private repositories)
+   5. Click "Generate token"
+   6. Copy the token and paste it in the `GITHUB_TOKEN` variable above
 
 ### Step 5: Deploy to Railway
 

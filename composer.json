@@ -8,12 +8,7 @@
             "email": "envaysoft@gmail.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/EnvaySoft/Laravel-Dotenv-Editor"
-        }
-    ],
+    "repositories": [],
     "require": {
         "php": "^8.2.0",
         "ext-gd": "*",

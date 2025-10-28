@@ -45,6 +45,12 @@ WORKDIR /var/www/html
 # Copy application files first (needed for composer-merge-plugin to access modules/*/composer.json)
 COPY . .
 
+# Configure GitHub authentication for Composer if token is provided
+ARG GITHUB_TOKEN
+RUN if [ -n "$GITHUB_TOKEN" ]; then \
+        composer config -g github-oauth.github.com $GITHUB_TOKEN || true; \
+    fi
+
 # Install PHP dependencies (merge-plugin will now find module dependencies)
 # First install without scripts to get the merge plugin working
 RUN composer install --no-scripts --prefer-dist --no-interaction

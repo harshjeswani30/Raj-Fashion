@@ -42,6 +42,11 @@ LOG_CHANNEL=stack
 BROADCAST_DRIVER=log
 FILESYSTEM_DISK=local
 
+# GitHub Authentication (Required for Composer)
+# Create a Personal Access Token at https://github.com/settings/tokens
+# Grant 'repo' scope for private repositories
+GITHUB_TOKEN=your_github_personal_access_token_here
+
 # FleetCart Specific
 INSTALLED=false
 
