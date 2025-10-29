@@ -13,6 +13,11 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # During boot, serve / as health until app signals ready
+    RewriteCond %{REQUEST_URI} ^/$
+    RewriteCond %{DOCUMENT_ROOT}/../storage/app/ready !-f
+    RewriteRule ^$ health [L]
+
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
     </IfModule>

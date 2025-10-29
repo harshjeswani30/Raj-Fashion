@@ -5,6 +5,9 @@
 
 echo "🚀 Starting FleetCart..."
 
+# Mark app as not ready yet
+rm -f storage/app/ready 2>/dev/null || true
+
 # Configure Composer GitHub token at runtime if provided
 if [ -n "$GITHUB_TOKEN" ]; then
     echo "🔐 Configuring Composer GitHub token..."
@@ -77,6 +80,9 @@ fi
 # Storage link
 echo "🔗 Creating storage symlink..."
 php artisan storage:link 2>/dev/null || echo "⚠️  Storage link already exists"
+
+# Mark app as ready for healthchecks
+touch storage/app/ready 2>/dev/null || true
 
 # Start the application
 echo "✅ Starting web server..."

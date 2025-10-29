@@ -11,4 +11,4 @@ Route::post('license', 'LicenseController@store')->name('license.store');
 // Lightweight health endpoint for Railway healthcheck
 Route::get('health', function () {
     return response()->json(['status' => 'ok']);
-});
+})->withoutMiddleware(['web', 'localize', 'locale_session_redirect', 'localization_redirect']);
