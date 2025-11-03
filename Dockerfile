@@ -97,8 +97,10 @@ COPY startup.sh /usr/local/bin/startup.sh
 RUN chmod +x /usr/local/bin/startup.sh
 
 # Health check with longer timeout for Railway
-HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=5 \
-    CMD curl -f http://localhost/health || exit 1
+# Use a more robust curl invocation and bind to 127.0.0.1:80 to avoid DNS/hostname issues
+# Increase start-period so the container has more time to finish startup tasks before healthchecks begin
+HEALTHCHECK --interval=30s --timeout=10s --start-period=180s --retries=5 \
+    CMD curl -fsS http://127.0.0.1:80/health || exit 1
 
 # Expose port
 EXPOSE 80
