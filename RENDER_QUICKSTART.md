@@ -66,13 +66,13 @@ APP_ENV=production
 APP_DEBUG=false
 APP_URL=https://YOUR_SERVICE_NAME.onrender.com
 
-# Database (use values from Step 4)
+# Database (use your actual database values)
 DB_CONNECTION=pgsql
-DB_HOST=YOUR_DB_HOST_FROM_STEP_4
+DB_HOST=dpg-d45mmu3uibrs73f9cbf0-a
 DB_PORT=5432
-DB_DATABASE=fleetcart
-DB_USERNAME=fleetcart
-DB_PASSWORD=YOUR_DB_PASSWORD_FROM_STEP_4
+DB_DATABASE=raj_fashion
+DB_USERNAME=raj_fashion_user
+DB_PASSWORD=nrjZZCNogTb2PXVM1DfL9stFZkDSoAOu
 
 # Cache and Sessions
 CACHE_DRIVER=database
