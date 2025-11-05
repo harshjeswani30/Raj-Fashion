@@ -45,6 +45,10 @@ WORKDIR /var/www/html
 # Copy application files first (needed for composer-merge-plugin to access modules/*/composer.json)
 COPY . .
 
+# Configure Git to use HTTPS instead of SSH for GitHub
+RUN git config --global url."https://github.com/".insteadOf "git@github.com:" && \
+    git config --global url."https://".insteadOf "git://"
+
 # Configure GitHub authentication for Composer if token is provided
 ARG GITHUB_TOKEN
 RUN if [ -n "$GITHUB_TOKEN" ]; then \
