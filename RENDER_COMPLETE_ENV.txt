@@ -1,0 +1,98 @@
+# Complete Environment Variables for Render.com Deployment
+# Copy and paste these into your Render Web Service → Environment section
+
+# ===========================================
+# BASIC APPLICATION SETTINGS
+# ===========================================
+APP_NAME=FleetCart
+APP_ENV=production
+APP_DEBUG=false
+APP_KEY=
+APP_TIMEZONE=UTC
+APP_LOCALE=en
+APP_URL=https://YOUR_SERVICE_NAME.onrender.com
+
+# ===========================================
+# DATABASE CONFIGURATION
+# ===========================================
+DB_CONNECTION=pgsql
+DB_HOST=dpg-d45mmu3uibrs73f9cbf0-a
+DB_PORT=5432
+DB_DATABASE=raj_fashion
+DB_USERNAME=raj_fashion_user
+DB_PASSWORD=nrjZZCNogTb2PXVM1DfL9stFZkDSoAOu
+
+# Alternative (use this OR the above DB_* variables, not both)
+# DATABASE_URL=postgresql://raj_fashion_user:nrjZZCNogTb2PXVM1DfL9stFZkDSoAOu@dpg-d45mmu3uibrs73f9cbf0-a/raj_fashion
+
+# ===========================================
+# LOGGING CONFIGURATION
+# ===========================================
+LOG_CHANNEL=errorlog
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=error
+
+# ===========================================
+# CACHE, SESSION & QUEUE CONFIGURATION
+# ===========================================
+BROADCAST_DRIVER=log
+CACHE_DRIVER=database
+FILESYSTEM_DISK=public
+QUEUE_CONNECTION=database
+SESSION_DRIVER=database
+SESSION_LIFETIME=120
+
+# ===========================================
+# MAIL CONFIGURATION (Set to log initially)
+# ===========================================
+MAIL_MAILER=log
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=noreply@yourdomain.com
+MAIL_FROM_NAME=FleetCart
+
+# ===========================================
+# PERFORMANCE & OPTIMIZATION
+# ===========================================
+OPCACHE_ENABLE=1
+OPCACHE_VALIDATE_TIMESTAMPS=0
+VIEW_CACHE_STORE=redis
+CONFIG_CACHE_STORE=redis
+
+# ===========================================
+# SECURITY SETTINGS
+# ===========================================
+SESSION_ENCRYPT=false
+BCRYPT_ROUNDS=10
+
+# ===========================================
+# FLEETCART SPECIFIC SETTINGS
+# ===========================================
+MIX_APP_URL="${APP_URL}"
+MIX_APP_NAME="${APP_NAME}"
+
+# ===========================================
+# OPTIONAL: EXTERNAL SERVICES
+# ===========================================
+# AWS_ACCESS_KEY_ID=
+# AWS_SECRET_ACCESS_KEY=
+# AWS_DEFAULT_REGION=us-east-1
+# AWS_BUCKET=
+# AWS_USE_PATH_STYLE_ENDPOINT=false
+
+# PUSHER_APP_ID=
+# PUSHER_APP_KEY=
+# PUSHER_APP_SECRET=
+# PUSHER_HOST=
+# PUSHER_PORT=443
+# PUSHER_SCHEME=https
+# PUSHER_APP_CLUSTER=mt1
+
+# ===========================================
+# RENDER SPECIFIC OPTIMIZATIONS
+# ===========================================
+PORT=80
+NODE_ENV=production
