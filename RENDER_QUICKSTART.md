@@ -52,9 +52,11 @@ git push origin main
    - **Branch**: `main`
    - **Runtime**: **Docker**
    - **Plan**: **Free** ($0/month, 750 hours)
-4. **Advanced Settings**:
-   - **Build Command**: `./render-build.sh`
-   - **Start Command**: `./render-start.sh`
+
+**IMPORTANT**: When using Docker runtime, Render will automatically:
+- Use your `Dockerfile` to build the image
+- Use the `CMD` instruction from Dockerfile to start the container
+- **DO NOT add Build Command or Start Command** - leave them empty!
 
 ### Step 6: Configure Environment Variables
 In the **Environment Variables** section, add these:
