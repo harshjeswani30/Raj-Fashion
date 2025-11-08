@@ -2,7 +2,7 @@
 
 ## Step 1: Access Environment Variables
 1. Go to your **Render Dashboard**
-2. Click on your **Web Service** (fleetcart)
+2. Click on your **Web Service** (raj-fashion)
 3. Go to **Environment** tab
 4. Click **Add Environment Variable**
 
@@ -51,9 +51,9 @@ NODE_ENV = production
 ## Step 3: Update APP_URL
 **IMPORTANT:** Replace `YOUR_ACTUAL_SERVICE_NAME` with your actual Render service name.
 
-For example, if your service URL is `https://fleetcart-abc123.onrender.com`, then:
+For example, if your service URL is `https://raj-fashion.onrender.com`, then:
 ```
-APP_URL = https://fleetcart-abc123.onrender.com
+APP_URL = https://raj-fashion.onrender.com
 ```
 
 ## Step 4: Save and Deploy

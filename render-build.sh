@@ -7,7 +7,15 @@ echo "🚀 Starting FleetCart build for Render.com..."
 
 # Install PHP dependencies
 echo "📦 Installing PHP dependencies..."
-composer install --no-dev --optimize-autoloader --no-interaction
+# Clear any existing caches that might interfere
+rm -rf vendor/
+rm -f composer.lock
+
+# Install dependencies with fresh resolution
+composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+
+# Force rebuild the autoloader to include module dependencies
+composer dump-autoload --optimize
 
 # Install Node dependencies and build assets
 echo "🎨 Building frontend assets..."
